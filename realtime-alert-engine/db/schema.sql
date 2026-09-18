@@ -1,3 +1,10 @@
+-- Drop in dependency order (children before parents) so this script can be
+-- re-run safely, e.g. via `python db/setup.py`, without leaving behind
+-- duplicate seed rows or orphaned foreign keys.
+DROP TABLE IF EXISTS alert_events;
+DROP TABLE IF EXISTS alert_rules;
+DROP TABLE IF EXISTS metric_readings;
+
 -- Business metrics the engine watches (e.g. hourly order volume, refund rate).
 CREATE TABLE IF NOT EXISTS metric_readings (
     reading_id   INTEGER PRIMARY KEY AUTOINCREMENT,
